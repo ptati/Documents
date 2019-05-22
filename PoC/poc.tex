@@ -1,0 +1,155 @@
+% !TEX TS-program = xelatex
+% !TEX encoding = UTF-8
+
+\documentclass[11pt]{article}
+
+\usepackage[margin=2.25cm]{geometry}
+\usepackage{fontspec} 
+\usepackage{textcomp}
+\defaultfontfeatures{Mapping=tex-text} 
+\usepackage{xunicode} 
+\usepackage{xltxtra}
+\usepackage{fancyhdr} 
+\usepackage{xspace}
+\usepackage[usenglish]{babel}
+
+\setmainfont{Charis SIL} 
+\setsansfont{DejaVu Sans}
+\setmonofont{DejaVu Sans Mono}
+
+\newfontfamily\titlefont[Scale=2]{Charis SIL}
+\newfontfamily\subtitlefont[Scale=1.2]{Charis SIL}
+
+% other LaTeX packages.....
+\geometry{letterpaper} 
+\usepackage[parfill]{parskip} 
+
+\usepackage{graphicx} 
+\usepackage{color}
+
+%% Additional commands
+\newcommand\codedx{{\color{blue}Code~Dx}\xspace}
+\newcommand\MS{Microsoft\texttrademark\xspace}
+\newcommand\python{Python\xspace}
+\newcommand\java{Java\xspace}
+\newcommand\csharp{C\#\xspace}
+
+% Page styling
+\pagestyle{fancy}
+
+\fancyhead{}
+\fancyfoot{}
+\fancyfoot[le,ro]{Page \thepage}
+\fancyfoot[re,lo]{\includegraphics[scale=0.2]{CodeDx-logo.png}}
+\renewcommand\headrulewidth{0mm}
+
+%%%%%
+%%%%% Begin Document
+%%%%%
+\begin{document}
+\begin{center}
+  {\titlefont Code Dx Proof of Concept (PoC) Suggestions}\\
+  {\subtitlefont Vincent M. Hopson  -- Field Applications Engineer at Code Dx}\\[5mm]
+\end{center}
+
+Here are a few items that can generally be used to create a compelling Proof of Concept at your site.  All items
+listed here should be considered to be optional.  We want to provide a framework to impart as much relevant 
+knowledge about \codedx as possible.
+
+%%%%%
+\section{Static Analysis Tools (SAST)}
+
+\codedx recommends that at least one commercial tool be used for your SAST testing.  A big part of using
+our solution is the correlation between different tools.  By using a commercial tool, and \codedx's internal
+orchestration, you will be able to see findings that have been detected by multiple tools.  This reduces the
+possibility of {\color{red}False Positives} considerably.
+
+%%%%%
+\section{Dynamic Analysis (DAST)}
+
+Normally, some form of dynamic testing is performed regardless of the application.  \codedx can receive the
+test results directly from tools like Portswigger's Burpsuite Professional, or the OWASP Zed Attack Proxy
+or ZAP.  The latter is free, and the former is very low cost (at the time of this writing, about \$300 USD).
+
+We support plug-ins for both tools, and can take results from the tools in other formats in case you have
+unalterable copies.
+
+It is possible to get results from other tools into \codedx, and we would be happy to help get some of those
+into our product.  This exercise helps with later automation needs you may have.
+
+%%%%%
+\section{Developer Desktop Integrations}
+
+It is essential that ease of use be addressed in almost any setting.  Especially if working with developers to 
+address various findings.  \codedx supports integrations into the most popular developer environments:
+\begin{itemize}
+	\item \MS Visual Studio
+	\item Eclipse
+	\item IntelliJ
+\end{itemize}
+
+Installation of the \codedx integrations helps demonstrate how easy it is to gather results directly on the
+developer's desktop.  By the security Engineer marking findings in \codedx to indicate the person responsible,
+an easy search can create a list of issues to be addressed in the desktop environment.
+
+%%%%%
+\section{Continuous Integration (CI) Installation}
+
+\codedx supports many of the current Continuous Integration systems that are in common use.  By
+taking a moment to install the plug-in, the CI environment can use \codedx to determine the health of
+a build.  This step could be used to provide the builder important security information, and automatically
+``break the build``; preventing potentially vulnerable code a path to your customers.
+
+%%%%%
+\section{Report Generation or Custom Reports}
+
+Data accumulation is a tough task, but reporting on what you find effectively can be nearly as big a
+challenge.  Information found inside of \codedx can be used in a myriad of ways to help protect your
+code, or potentially your reputation outside of your organization.  Reports can be generated inside of
+the tool as a number of formats with PDF probably being the most prevalent.
+
+Using the Apache Format Object Processor (FOP) inside of \codedx, we can generate alternate
+reports that cover the entire spectrum of intended audiences.  From a risk assessment report to the CEO 
+to a code block to be given to an Engineer.  We can help you build effective reports that are black and
+white, or colorful descriptions of your security and/or quality stance.
+
+%%%%%
+\section{Connect to Your Engineers}
+
+A couple of tight integrations help you to connect appropriate data to your Engineers.  Using Git to read
+your repository and collect the most recent code is perhaps the most obvious.  Any Git based system
+can be addressed.
+
+Another common integration tool is to track various findings inside of Atlassian's Jira.  \codedx can be
+configured to push data to Jira on command, or automatically push tickets into Jira when analyses complete.
+This is a great way to show value by integrating Jira into the PoC workflow.
+
+%%%%%
+\section{Penetration Test (PEN) Results}
+
+If you have results you can use from your PEN Testing in an electronic format, we can create a script
+(\python is my preferred scripting language, but we can use the language of your choice) to put those
+results into \codedx.  This operation will show you how to gather the results into \codedx and what should
+be captured for correlations.
+
+Note that an interface inside of \codedx will allow entry of PEN test results, and is a good display of
+the information that would be needed for good correlation.
+
+%%%%%
+\section{Threat Modeling}
+
+It is possible to ingest information into \codedx from any phase of your development pipeline.  \MS
+provides a free threat modeler that can be used to create results that \codedx can ingest directly.  This
+tool only requires a knowledge of your application (or a hypothetical one) to create useful information.
+
+%%%%%
+\section{Hybrid Analysis}
+
+If your team is using \java or \csharp, it is possible to configure \codedx to perform a deeper examination of
+your testing results.  This ``hybrid`` analysis can correlate SAST findings with your DAST operations.
+
+There are two brands of \emph{hybrid} analysis; trace based analysis (\java only), and traceless (both
+\java and \csharp).  Setting these up is relatively easy, and can provide a much deeper window into how
+static findings relate to detected findings.  These tend to have a \emph{very low} {\color{red} False Positive} rate.
+
+\end{document}
